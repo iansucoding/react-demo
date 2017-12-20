@@ -7,6 +7,12 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body',
 });
 
+
+const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin'); 
+
+const isProd = process.argv.indexOf('-p') !== -1;
+ 
+
 module.exports = {
   // 檔案起始點從 entry 進入，因為是陣列所以也可以是多個檔案
   entry: [
@@ -33,8 +39,11 @@ module.exports = {
   // devServer 則是 webpack-dev-server 設定
   devServer: {
     inline: true,
-    port: 8765,
+    port: 8703,
   },
   // plugins 放置所使用的外掛
-  plugins: [HTMLWebpackPluginConfig],
+  plugins: [
+    HTMLWebpackPluginConfig,
+    //new BaseHrefWebpackPlugin({ baseHref: isProd ? 'http://iansucoding.github.io/resume/works/react-tw-festivals/':'/' })
+  ],
 };
